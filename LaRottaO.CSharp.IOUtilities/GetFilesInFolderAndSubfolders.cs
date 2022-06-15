@@ -32,7 +32,7 @@ namespace LaRottaO.CSharp.IOUtilities
                 }
 
                 return foundFilesList;
-            }
+            });
         }
     }
 }
