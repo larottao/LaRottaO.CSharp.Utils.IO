@@ -8,7 +8,7 @@ namespace LaRottaO.CSharp.IOUtilities
 {
     public class ExecuteExe
     {
-        public Task<string> execute(String argExePath, String argExeArguments, Boolean argCreateNoWindow = true)
+        public Task<string> execute(String argExePath, String argExeArguments, Boolean argCreateNoWindow = true, Boolean argUseHiddenWindowStyle = true)
         {
             return Task.Run(() =>
             {
@@ -16,7 +16,11 @@ namespace LaRottaO.CSharp.IOUtilities
                 {
                     System.Diagnostics.Process process = new System.Diagnostics.Process();
                     System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
-                    startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+
+                    if (argUseHiddenWindowStyle)
+                    {
+                        startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                    }
 
                     startInfo.FileName = argExePath;
                     startInfo.Arguments = argExeArguments;
