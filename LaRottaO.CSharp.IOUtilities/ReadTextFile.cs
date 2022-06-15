@@ -33,7 +33,7 @@ namespace LaRottaO.CSharp.IOUtilities
                         sb.Append(line.ToString() + Environment.NewLine);
                     }
 
-                    return new Tuple<Boolean, possibleResult, String>(false, possibleResult.SUCCESS, sb.ToString());
+                    return new Tuple<Boolean, possibleResult, String>(true, possibleResult.SUCCESS, sb.ToString());
                 }
                 catch (Exception ex)
                 {

@@ -26,17 +26,9 @@ namespace LaRottaO.CSharp.IOUtilities
 
         { SUCCESS, JSON_IS_EMPTY, KEY_NOT_FOUND_ON_JSON, INVALID_JSON_STRUCTURE };
 
-        public Tuple<Boolean, possibleResults, List<Tuple<String, String>>> getKey(String argRequiredkey, String jsonPath = null, String argJsonAsPlanTexta = false, Boolean removeCarriageReturn = false, Boolean removeDuplicatedWhitespaces = false)
+        public Tuple<Boolean, possibleResults, List<Tuple<String, String>>> getKey(String argRequiredkey, String argJsonAsPlanText, Boolean removeCarriageReturn = false, Boolean removeDuplicatedWhitespaces = false)
         {
-            String argJsonAsPlanText = "";
             try
-            {
-                if (jsonPath != null)
-                {
-                    argJsonAsPlanText = ReadTextFile(null);
-                }
-            }
-                try
             {
                 if (removeCarriageReturn)
                 {
