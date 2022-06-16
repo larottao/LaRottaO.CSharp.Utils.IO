@@ -270,6 +270,8 @@ namespace LaRottaO.CSharp.IOUtilities
 
             String value = argJsonAsPlanText.Substring(rightStartingQuote, (rightEndingQuote - rightStartingQuote + 1));
 
+            value = value.Replace("\"", "");
+
             return value;
         }
 
