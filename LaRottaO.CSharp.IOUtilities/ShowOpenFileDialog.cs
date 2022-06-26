@@ -8,10 +8,13 @@ using System.Windows.Forms;
 
 namespace LaRottaO.CSharp.IOUtilities
 {
-    public class ShowOpenFileDialog
+    public static class ShowOpenFileDialog
     {
-        public static String showOpenFileDialog(String defaultFilename, String defaultExtension, String startingDirectory = null)
+        public static String showOpenFileDialog(String argDefaultFilename, String argDefaultExtension = "Text files (*.txt)|*.txt|All files (*.*)|*.*", String argStartingDirectory = null, String argDescription = "")
         {
+            //For the filter, use
+            //"Text files (*.txt)|*.txt|All files (*.*)|*.*"
+
             string selectedPath = null;
 
             var t = new Thread((ThreadStart)(() =>
@@ -19,14 +22,13 @@ namespace LaRottaO.CSharp.IOUtilities
                 OpenFileDialog openFileDialog1 = new OpenFileDialog();
 
                 openFileDialog1.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-                openFileDialog1.Title = "Open file " + defaultExtension.ToUpper();
-                openFileDialog1.DefaultExt = defaultExtension.ToUpper();
-                openFileDialog1.Filter = "File " + defaultExtension.ToUpper() + " (*" + defaultExtension.ToUpper() + ")|*" + defaultExtension.ToUpper();
-
+                openFileDialog1.Title = argDescription;
+                openFileDialog1.DefaultExt = argDefaultExtension.ToUpper();
+                openFileDialog1.Filter = argDefaultExtension;
                 openFileDialog1.FilterIndex = 2;
                 openFileDialog1.RestoreDirectory = true;
-                openFileDialog1.FileName = defaultFilename;
-                openFileDialog1.InitialDirectory = startingDirectory;
+                openFileDialog1.FileName = argDefaultFilename;
+                openFileDialog1.InitialDirectory = argStartingDirectory;
 
                 openFileDialog1.ShowDialog(new Form() { TopMost = true });
 

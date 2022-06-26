@@ -8,9 +8,9 @@ using System.Windows.Forms;
 
 namespace LaRottaO.CSharp.IOUtilities
 {
-    public class ShowSaveAsDialog
+    public static class ShowSaveAsDialog
     {
-        public static String showSaveAsDialog(String defaultFilename, String defaultExtension)
+        public static String showSaveAsDialog(String argDefaultFilename, String argDefaultExtension, String argDescription = "")
         {
             string selectedPath = null;
             var t = new Thread((ThreadStart)(() =>
@@ -18,13 +18,13 @@ namespace LaRottaO.CSharp.IOUtilities
                 SaveFileDialog saveFileDialog1 = new SaveFileDialog();
 
                 saveFileDialog1.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-                saveFileDialog1.Title = "Save file " + defaultExtension.ToUpper();
-                saveFileDialog1.DefaultExt = defaultExtension.ToUpper();
-                saveFileDialog1.Filter = "File " + defaultExtension.ToUpper() + " (*" + defaultExtension.ToUpper() + ")|*" + defaultExtension.ToUpper();
+                saveFileDialog1.Title = argDescription;
+                saveFileDialog1.DefaultExt = argDefaultExtension.ToUpper();
+                saveFileDialog1.Filter = argDefaultExtension;
 
                 saveFileDialog1.FilterIndex = 2;
                 saveFileDialog1.RestoreDirectory = true;
-                saveFileDialog1.FileName = defaultFilename;
+                saveFileDialog1.FileName = argDefaultFilename;
 
                 saveFileDialog1.ShowDialog(new Form() { TopMost = true });
 

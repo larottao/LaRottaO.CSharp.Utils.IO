@@ -8,15 +8,16 @@ using System.Windows.Forms;
 
 namespace LaRottaO.CSharp.IOUtilities
 {
-    public class ShowOpenFolderDialog
+    public static class ShowOpenFolderDialog
     {
-        public static String showOpenFolderDialog()
+        public static String showOpenFolderDialog(String argDescription = "")
         {
             string selectedPath = null;
             var t = new Thread((ThreadStart)(() =>
             {
                 FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
 
+                folderBrowserDialog.Description = argDescription;
                 folderBrowserDialog.ShowDialog((new Form() { TopMost = true }));
 
                 selectedPath = folderBrowserDialog.SelectedPath;
