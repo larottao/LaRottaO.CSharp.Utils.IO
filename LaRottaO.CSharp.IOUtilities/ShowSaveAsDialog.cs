@@ -18,7 +18,7 @@ namespace LaRottaO.CSharp.IOUtilities
             //Example: "Text files (*.txt)|*.txt|All files (*.*)|*.*"
             //"Supported extensions | *.0??;*.1??;*.2??;*.3??;*.4??;*.5??;*.6??;*.7??;*.8??;*.9??";
 
-            string selectedPath = null;
+            string filePathSelectedByUser = null;
             var t = new Thread((ThreadStart)(() =>
             {
                 SaveFileDialog saveFileDialog = new SaveFileDialog();
@@ -34,14 +34,21 @@ namespace LaRottaO.CSharp.IOUtilities
 
                 saveFileDialog.ShowDialog(new Form() { TopMost = true });
 
-                selectedPath = saveFileDialog.FileName;
+                if (saveFileDialog.FileName != null && !saveFileDialog.Equals(argDefaultFilename))
+                {
+                    filePathSelectedByUser = saveFileDialog.FileName;
+                }
+                else
+                {
+                    filePathSelectedByUser = "";
+                }
             }));
 
             t.SetApartmentState(ApartmentState.STA);
             t.Start();
             t.Join();
 
-            return selectedPath;
+            return filePathSelectedByUser;
         }
     }
 }

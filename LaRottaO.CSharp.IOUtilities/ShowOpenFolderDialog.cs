@@ -12,7 +12,7 @@ namespace LaRottaO.CSharp.IOUtilities
     {
         public static String showOpenFolderDialog(String argDescription = "")
         {
-            string selectedPath = null;
+            string folderPathSelectedByUser = null;
             var t = new Thread((ThreadStart)(() =>
             {
                 FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
@@ -20,14 +20,21 @@ namespace LaRottaO.CSharp.IOUtilities
                 folderBrowserDialog.Description = argDescription;
                 folderBrowserDialog.ShowDialog((new Form() { TopMost = true }));
 
-                selectedPath = folderBrowserDialog.SelectedPath;
+                if (folderBrowserDialog.SelectedPath != null)
+                {
+                    folderPathSelectedByUser = folderBrowserDialog.SelectedPath;
+                }
+                else
+                {
+                    folderPathSelectedByUser = "";
+                }
             }));
 
             t.SetApartmentState(ApartmentState.STA);
             t.Start();
             t.Join();
 
-            return selectedPath;
+            return folderPathSelectedByUser;
         }
     }
 }
