@@ -34,7 +34,7 @@ namespace LaRottaO.CSharp.IOUtilities
 
                 saveFileDialog.ShowDialog(new Form() { TopMost = true });
 
-                if (saveFileDialog.FileName != null && !saveFileDialog.Equals(argDefaultFilename))
+                if (saveFileDialog.FileName != null && !saveFileDialog.FileName.Equals(argDefaultFilename))
                 {
                     filePathSelectedByUser = saveFileDialog.FileName;
                 }
