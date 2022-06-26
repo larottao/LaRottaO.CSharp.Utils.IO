@@ -12,23 +12,29 @@ namespace LaRottaO.CSharp.IOUtilities
     {
         public static String showSaveAsDialog(String argDefaultFilename, String argDefaultExtension, String argDescription = "")
         {
+            //The filter string must contain a description of the filter,
+            //followed by the vertical bar (|) and the filter pattern.
+            //The strings for different filtering options must also be separated by the vertical bar.
+            //Example: "Text files (*.txt)|*.txt|All files (*.*)|*.*"
+            //"Supported extensions | *.0??;*.1??;*.2??;*.3??;*.4??;*.5??;*.6??;*.7??;*.8??;*.9??";
+
             string selectedPath = null;
             var t = new Thread((ThreadStart)(() =>
             {
-                SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+                SaveFileDialog saveFileDialog = new SaveFileDialog();
 
-                saveFileDialog1.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-                saveFileDialog1.Title = argDescription;
-                saveFileDialog1.DefaultExt = argDefaultExtension.ToUpper();
-                saveFileDialog1.Filter = argDefaultExtension;
+                saveFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+                saveFileDialog.Title = argDescription;
+                saveFileDialog.DefaultExt = argDefaultExtension.ToUpper();
+                saveFileDialog.Filter = argDefaultExtension;
 
-                saveFileDialog1.FilterIndex = 2;
-                saveFileDialog1.RestoreDirectory = true;
-                saveFileDialog1.FileName = argDefaultFilename;
+                saveFileDialog.FilterIndex = 2;
+                saveFileDialog.RestoreDirectory = true;
+                saveFileDialog.FileName = argDefaultFilename;
 
-                saveFileDialog1.ShowDialog(new Form() { TopMost = true });
+                saveFileDialog.ShowDialog(new Form() { TopMost = true });
 
-                selectedPath = saveFileDialog1.FileName;
+                selectedPath = saveFileDialog.FileName;
             }));
 
             t.SetApartmentState(ApartmentState.STA);
